@@ -32,6 +32,10 @@
 				<version>1.2.1</version>
 				<configuration>
 					<mainClass>read.App</mainClass>
+					<arguments>
+                            <argument>input.txt</argument>
+                            <argument>output.txt</argument>
+                        </arguments>
 				</configuration>
 			</plugin>
 		</plugins>
