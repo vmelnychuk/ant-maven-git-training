@@ -1,13 +1,16 @@
 package read;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,10 +60,11 @@ public class App {
 	}
 
 	public void readFileToFileStore() {
-		FileInputStream in = null;
+		BufferedReader in = null;
 		try {
 			if (isInputValid()) {
-				in = new FileInputStream(inputFile);
+				in = new BufferedReader(
+						new FileReader(inputFile));
 				int c;
 				while ((c = in.read()) != -1) {
 					fileStore.add(c);
@@ -76,13 +80,17 @@ public class App {
 	}
 
 	public void writeFileStoreToFile() {
-		FileOutputStream out = null;
+		PrintWriter out = null;
 		try {
 			if (isOutputValid()) {
-				out = new FileOutputStream(outputFile);
+				out = new PrintWriter(
+						new BufferedWriter(
+						new FileWriter(outputFile, true)));
 				for(Integer c : fileStore) {
 					out.write(c);
 				}
+				/* add new line in the end of file, this is just for readability of results */
+				out.write("\n");
 			} else {
 				System.err.println("problems with output file");
 			}
