@@ -47,8 +47,8 @@
 			<arg value="/c" />
 			<arg line="git clone -b ${repo.branch} ${git.repo} ${dir.repo}" />
 		</exec>
-		<antcall target="other-menu">
+		<!-- <antcall target="other-menu">
 			<param name="basedir" value="${dir.repo}"/>
-		</antcall>
+		</antcall> -->
 	</target>
 </project>
