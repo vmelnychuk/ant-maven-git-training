@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ant-training" default="clean" basedir=".">
+<project name="ant-training" default="start" basedir=".">
+	<property environment="env" />
 	<property file="build.properties" />
-	<property environment="env"/>
+	<target name="start" description="user interaction">
+		<input message="Choose branch of project (master/forward)?"
+			validargs="master,forvard"
+			addproperty="repo.branch"
+			defaultvalue="${branch.default}" />
+		<antcall target="github" />
+	</target>
 	<target name="clean" description="Run clean task for Maven">
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${env.M2}\mvn.bat" />
 			<arg line="clean" />
 		</exec>
+		<delete dir="${dir.repo}" />
 	</target>
 	<target name="compile" depends="clean" description="Run compile task for Maven">
 		<exec executable="cmd">
@@ -24,10 +32,10 @@
 		</exec>
 	</target>
 	<target name="github" description="Get sources from github">
+		<mkdir dir="${dir.repo}" />
 		<exec executable="cmd">
 			<arg value="/c" />
-			<arg value="git" />
-			<arg line="--version" />
+			<arg line="git clone -b ${repo.branch} ${git.repo} ${dir.repo}" />
 		</exec>
 	</target>
 </project>
