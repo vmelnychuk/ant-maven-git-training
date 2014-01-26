@@ -20,8 +20,14 @@
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${env.M2}\mvn.bat" />
-			<!-- <arg line="exec:java" /> -->
 			<arg line="exec:java -Dinput=${file.input} -Doutput=${file.output}" />
+		</exec>
+	</target>
+	<target name="github" description="Get sources from github">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="git" />
+			<arg line="--version" />
 		</exec>
 	</target>
 </project>
