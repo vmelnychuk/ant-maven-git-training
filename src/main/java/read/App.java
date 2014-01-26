@@ -67,7 +67,7 @@ public class App {
 				while ((c = in.read()) != -1) {
 					fileStore.add(c);
 				}
-				Collections.reverse(fileStore);
+				// Collections.reverse(fileStore);
 			} else {
 				System.err.println("problems with input file");
 			}
