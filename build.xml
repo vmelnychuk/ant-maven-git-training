@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant-training" default="clean" basedir=".">
+	<property file="build.properties" />
+	<property environment="env"/>
+	<target name="clean" description="Run clean task for Maven">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.M2}\mvn.bat" />
+			<arg line="clean" />
+		</exec>
+	</target>
+	<target name="compile" depends="clean" description="Run compile task for Maven">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.M2}\mvn.bat" />
+			<arg line="compile" />
+		</exec>
+	</target>
+	<target name="exec" depends="compile" description="Run exec:java task for Maven">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${env.M2}\mvn.bat" />
+			<!-- <arg line="exec:java" /> -->
+			<arg line="exec:java -Dinput=${file.input} -Doutput=${file.output}" />
+		</exec>
+	</target>
+</project>
