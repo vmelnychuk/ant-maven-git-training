@@ -4,10 +4,20 @@
 	<property file="build.properties" />
 	<target name="start" description="user interaction">
 		<input message="Choose branch of project (master/forward)?"
-			validargs="master,forvard"
+			validargs="master,forward"
 			addproperty="repo.branch"
 			defaultvalue="${branch.default}" />
-		<antcall target="github" />
+		<antcall target="github">
+		</antcall>
+	</target>
+	<target name="other-menu" description="user interaction">
+		<input message="Choose action (compile/execute)?"
+			validargs="compile,execute"
+			addproperty="action"
+			defaultvalue="execute" />
+		<antcall target="${action}">
+			<param name="basedir" value="${dir.repo}"/>
+		</antcall>
 	</target>
 	<target name="clean" description="Run clean task for Maven">
 		<exec executable="cmd">
@@ -24,7 +34,7 @@
 			<arg line="compile" />
 		</exec>
 	</target>
-	<target name="exec" depends="compile" description="Run exec:java task for Maven">
+	<target name="execute" depends="compile" description="Run exec:java task for Maven">
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${env.M2}\mvn.bat" />
@@ -37,5 +47,8 @@
 			<arg value="/c" />
 			<arg line="git clone -b ${repo.branch} ${git.repo} ${dir.repo}" />
 		</exec>
+		<antcall target="other-menu">
+			<param name="basedir" value="${dir.repo}"/>
+		</antcall>
 	</target>
 </project>
