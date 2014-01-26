@@ -11,6 +11,8 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<input>input.txt</input>
+		<output>output.txt</output>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -22,7 +24,7 @@
 	<build>
 		<finalName>reader</finalName>
 		<plugins>
-		<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
@@ -39,9 +41,9 @@
 				<configuration>
 					<mainClass>read.App</mainClass>
 					<arguments>
-                            <argument>input.txt</argument>
-                            <argument>output.txt</argument>
-                        </arguments>
+						<argument>${input}</argument>
+						<argument>${output}</argument>
+					</arguments>
 				</configuration>
 			</plugin>
 		</plugins>
